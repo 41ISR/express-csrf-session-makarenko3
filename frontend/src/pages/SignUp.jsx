@@ -11,7 +11,7 @@ const SignUp = () => {
         }
 
         try {
-            const res = await fetch("https://shiny-broccoli-7r4gg65p9gr2xxr6-3000.app.github.dev/auth/signup", {
+            const res = await fetch("https://friendly-telegram-x5v6p759jwq9c99rr-3000.app.github.dev/auth/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
