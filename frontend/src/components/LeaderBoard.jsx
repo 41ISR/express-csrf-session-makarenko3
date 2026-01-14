@@ -18,7 +18,7 @@ const LeaderBoard = () =>{
             updateleaderboard()
             const interval = setInterval(() => {
                 updateleaderboard()
-            }, 5000)
+            }, 5500)
             return () => {clearInterval(interval)}
         }, [])
     return(
