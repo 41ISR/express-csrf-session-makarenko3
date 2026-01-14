@@ -1,7 +1,9 @@
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 
 const SignIn = () => {
     const navigate = useNavigate()
+    const [error, setError] = useState()
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -11,7 +13,7 @@ const SignIn = () => {
         }
 
         try {
-            const res = await fetch("https://shiny-broccoli-7r4gg65p9gr2xxr6-3000.app.github.dev/auth/signin", {
+            const res = await fetch("https://friendly-telegram-x5v6p759jwq9c99rr-3000.app.github.dev/auth/signin", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -20,13 +22,17 @@ const SignIn = () => {
                 credentials: "include"
             })
 
-            if (!res.ok) throw new Error(res.statusText)
+            const data = await res.json()
 
-            console.log(res)
+            if (!res.ok) throw new Error(data.error)
+
+            
+
             navigate("/")
 
         } catch (error) {
             console.error(error)
+            setError(error.message)
         }
     }
 
@@ -42,10 +48,12 @@ const SignIn = () => {
                     <form onSubmit={handleSubmit}>
                         <input name="email" type="text" placeholder="Имя пользователя" required />
                         <input name="password" type="password" placeholder="Пароль" required />
+                        {error && <p className="form-error">{error}</p>}
                         <button type="submit">Войти</button>
                     </form>
+                    <Link className="form-link" to={"/signup"}>Регистрация</Link>
                 </div>
-            </div>
+            </div>     
         </div>
     )
 }
